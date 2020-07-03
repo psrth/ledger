@@ -1,0 +1,22 @@
+{
+  "name": "ledger",
+  "version": "1.0.0",
+  "description": "ledger app for recording transactions",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psrth/ledger.git"
+  },
+  "author": "Parth Sharma",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/psrth/ledger/issues"
+  },
+  "homepage": "https://github.com/psrth/ledger#readme",
+  "dependencies": {
+    "electron": "^9.0.5"
+  }
+}
