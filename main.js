@@ -41,8 +41,8 @@ function createAddWindow() {
 
     // creating a new window
     addWindow = new BrowserWindow({
-        width: 200,
-        height: 300,
+        width: 300,
+        height: 200,
         title: 'Add Shopping List Item'
     });
 
@@ -64,8 +64,8 @@ function createAddWindow() {
 // creating menu template
 const mainMenuTemplate = [
     {
-        label:'File',
-        submenu: [
+        label: 'File',
+        submenu:[
             {
                 label: 'Add Item',
                 click() {
@@ -92,24 +92,29 @@ const mainMenuTemplate = [
 // mac/windows menu support
 // unshift adds empty object to beginning of array
 if(process.platform == 'darwin') {
-    mainMenuTemplate.unshift({});
+   mainMenuTemplate.unshift({
+       label: 'Electron'
+   });
 }
 
 
 
 
-// add developer tool items if not in production
-if (process.env.NODE_ENV !== 'production'){
+// Add developer tools option if in dev
+if(process.env.NODE_ENV !== 'production'){
     mainMenuTemplate.push({
-        label: 'Developer Tools',
-        submenu:[
-            {
-                label: 'Toggle Dev Tools',
-                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
-                click(item, focusedWindow){
-                    focusedWindow.toggleDevTools();
-                }
-            }
-        ]
-    })
-}
+      label: 'Developer Tools',
+      submenu:[
+        {
+          role: 'reload'
+        },
+        {
+          label: 'Toggle DevTools',
+          accelerator:process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+          click(item, focusedWindow){
+            focusedWindow.toggleDevTools();
+          }
+        }
+      ]
+    });
+  }
