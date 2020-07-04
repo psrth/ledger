@@ -5,8 +5,10 @@ const { Menu } = require('electron');
 
 const {app, BrowserWindow} = electron;
 
+
 let mainWindow;
 let addWindow;
+
 
 // listen for the app to be ready
 app.on('ready', function() {
@@ -33,6 +35,7 @@ app.on('ready', function() {
 
 });
 
+
 // create new add window function
 function createAddWindow() {
 
@@ -57,11 +60,9 @@ function createAddWindow() {
 }
 
 
+
 // creating menu template
 const mainMenuTemplate = [
-    {
-        label:'Electron',
-    },
     {
         label:'File',
         submenu: [
@@ -85,3 +86,30 @@ const mainMenuTemplate = [
         ]
     }
 ];
+
+
+
+// mac/windows menu support
+// unshift adds empty object to beginning of array
+if(process.platform == 'darwin') {
+    mainMenuTemplate.unshift({});
+}
+
+
+
+
+// add developer tool items if not in production
+if (process.env.NODE_ENV !== 'production'){
+    mainMenuTemplate.push({
+        label: 'Developer Tools',
+        submenu:[
+            {
+                label: 'Toggle Dev Tools',
+                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+                click(item, focusedWindow){
+                    focusedWindow.toggleDevTools();
+                }
+            }
+        ]
+    })
+}
