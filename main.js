@@ -35,6 +35,7 @@ app.on('ready', function() {
 
 // create new add window function
 function createAddWindow() {
+
     // creating a new window
     addWindow = new BrowserWindow({
         width: 200,
@@ -48,6 +49,11 @@ function createAddWindow() {
         protocol: 'file:',
         slashes: true
     }));
+
+    // garbage window collection
+    addWindow.on('close', function(){
+        addWindow = null;
+    });
 }
 
 
